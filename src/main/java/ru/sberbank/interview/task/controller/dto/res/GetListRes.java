@@ -1,11 +1,16 @@
 package ru.sberbank.interview.task.controller.dto.res;
 
 import java.util.List;
-import ru.sberbank.interview.task.controller.dto.support.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import ru.sberbank.interview.task.controller.dto.support.EntityDto;
+
+@Data
+@AllArgsConstructor
 public class GetListRes {
 
-    private List<Entity> items;
+    private List<EntityDto> items;
     private Integer unread;
 
 }
