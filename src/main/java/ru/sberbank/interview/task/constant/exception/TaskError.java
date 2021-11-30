@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum TaskError {
 
-    NOT_ALL_ID_EXSIST(1004, "Не найден объект с id ", HttpStatus.BAD_REQUEST);
+    NOT_ALL_ID_EXSIST(1004, "Не найден объект с id ", HttpStatus.BAD_REQUEST),
+    ID_CANNOT_BE_NULL(1004, "Необходимо указать id" , HttpStatus.BAD_REQUEST);
 
     private final int errorCode;
     private final String message;

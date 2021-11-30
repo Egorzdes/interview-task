@@ -23,7 +23,11 @@ public class ServiceImpl implements Service {
 
     @Override
     public List<EntityDto> getAllEntitiesById(List<Long> id) {
-        List<EntityDao> list = (List<EntityDao>) entityRepository.findAllById(id);
+        if (id.isEmpty()) {
+            throw new TaskException(TaskError.ID_CANNOT_BE_NULL, " ");
+        }
+        List<EntityDao> list = StreamSupport.stream(entityRepository.findAllById(id).spliterator(), false)
+                .collect(Collectors.toList());
         Set<Long> allEntityId = list.stream().map(EntityDao::getId).collect(Collectors.toSet());
         id.removeAll(allEntityId);
         if (!id.isEmpty()) {
@@ -36,7 +40,7 @@ public class ServiceImpl implements Service {
     public List<EntityDto> getEntityByCodeAndSysName(Integer code, String sysName) {
         List<EntityDto> entityDtoList;
         if (code != null && sysName != null) {
-            entityDtoList = convertList(entityRepository.findEntityDaoByCodeAndSysName(code, sysName));
+            entityDtoList = convertList(entityRepository.findEntityDaoByCodeOrSysName(code, sysName));
         } else if (code != null) {
             entityDtoList = convertList(entityRepository.findAllByCode(code));
         } else if (sysName != null) {

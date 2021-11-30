@@ -14,7 +14,7 @@ public interface EntityRepository extends CrudRepository<EntityDao, Long> {
 
     List<EntityDao> findAllBySysName(String sysName);
 
-    List<EntityDao> findEntityDaoByCodeAndSysName(Integer code, String sysName);
+    List<EntityDao> findEntityDaoByCodeOrSysName(Integer code, String sysName);
 
 }
 
